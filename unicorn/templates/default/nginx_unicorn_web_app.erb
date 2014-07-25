@@ -36,12 +36,10 @@ server {
       proxy_send_timeout <%= node[:nginx][:proxy_send_timeout] %>;
     <% end -%>
 
-    <% if node[:force_ssl][application] %>
-      # force ssl
-      if ($http_x_forwarded_proto != 'https') {
-        rewrite ^ https://$host$request_uri? permanent;
-      }
-    <% end %>
+    # force ssl
+    if ($http_x_forwarded_proto != 'https') {
+      rewrite ^ https://$host$request_uri? permanent;
+    }
 
     # If you don't find the filename in the static files
     # Then request it from the unicorn server
