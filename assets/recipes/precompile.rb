@@ -24,10 +24,4 @@ node[:deploy].each do |application, deploy|
     command 'bundle exec rake assets:create_nondigest'
     environment 'RAILS_ENV' => deploy[:rails_env]
   end
-
-  execute "clean assets for Rails app #{application}" do
-    cwd deploy[:current_path]
-    command 'bundle exec rake assets:clean[5]'
-    environment 'RAILS_ENV' => deploy[:rails_env]
-  end
 end
