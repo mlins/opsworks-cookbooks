@@ -6,13 +6,6 @@ node[:deploy].each do |application, deploy|
     action :create
   end
 
-  directory "#{deploy[:deploy_to]}/shared/assets" do
-    owner 'deploy'
-    group 'www-data'
-    mode '0770'
-    action :create
-  end
-
   execute "precompile assets for Rails app #{application}" do
     cwd deploy[:current_path]
     command 'bundle exec rake assets:precompile'
