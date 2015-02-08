@@ -1,7 +1,7 @@
 node[:deploy].each do |application, deploy|
   directory "#{deploy[:deploy_to]}/shared/assets" do
-    group params[:group]
-    owner params[:user]
+    group deploy[:group]
+    owner deploy[:user]
     mode 0770
     action :create
     recursive true
